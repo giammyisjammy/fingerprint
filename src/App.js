@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import DataTable from "./dataTable";
-import { cleanData, getFingerprint } from "./utils";
+import { cleanData, getFingerprint, toSingleObject } from "./utils";
 import { Helmet } from "react-helmet";
 
 function App() {
@@ -12,21 +12,17 @@ function App() {
   useEffect(() => {
     if (showReport) {
       fetch("https://extreme-ip-lookup.com/json")
-        .then(res => res.json())
+        .then(res => res.json(), console.error)
         .then(ip => Promise.all([ip, getFingerprint()]))
         .then(([ip, finger]) => {
-          let f = finger
+          const fp = finger
             .map(({ key, value }) => ({ [key]: value }))
-            .reduce((acc, curr) => ({
-              ...acc,
-              ...curr
-            }));
+            .reduce(toSingleObject);
+          const cleanFp = cleanData(fp);
+          const cleanIp = cleanData(ip);
 
-          f = cleanData(f);
-          ip = cleanData(ip);
-
-          setFingerprint(f);
-          setIpData(ip);
+          setFingerprint(cleanFp);
+          setIpData(cleanIp);
           setShowReport(false);
         });
     }
@@ -35,7 +31,7 @@ function App() {
   return (
     <div>
       <Helmet>
-        <title>Seanky fingerprint and IP tracker | molamk</title>
+        <title>Seanky fingerprint and IP tracker</title>
         <meta
           name="description"
           content="Small React app to collect a device's fingerprint and IP address metadata"
@@ -53,15 +49,14 @@ function App() {
             </a>
           </h1>
           <p>
-            This project is for educational purposes only. No data is being
-            stored.
+            Questo è un progetto a solo scopo educativo. Nessun dato viene memorizzato. Giuro.
           </p>
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href="https://github.com/molamk/fingerprint"
+            href="https://github.com/giammyisjammy/fingerprint"
           >
-            Check out the code on Github
+            Codice su Github
           </a>
         </section>
       </header>

@@ -1,5 +1,5 @@
 import React from "react";
-import { startCase } from "lodash";
+import startCase from "lodash/startCase";
 
 const DataTable = ({ title, data }) => (
   <section>

@@ -1,25 +1,20 @@
 import fp from "fingerprintjs2";
 
-export const cleanData = f => {
-  for (let key in f) {
-    if (f[key] === null || f[key] === undefined || f[key] instanceof Error) {
-      delete f[key];
-    }
-    if (Array.isArray(f[key])) {
-      f[key] = f[key].join(", ");
-    }
-    if (
-      (typeof f[key] === "string" || f[key] instanceof String) &&
-      f[key].length === 0
-    ) {
-      delete f[key];
-    }
-    if (typeof f[key] === "boolean") {
-      f[key] = `${f[key]}`;
-    }
-  }
+const notErrorOrUndefined = ([k, v]) => !(v === null || v === undefined || v instanceof Error);
+const arrayToString = ([k, v]) => Array.isArray(v) ? [k, v.join(', ')] : [k, v];
+const notEmptyString = ([k, v]) => !((typeof v === 'string' || v instanceof String) && v.lenght === 0);
+const boolToString = ([k, v]) => typeof v === 'boolean' ? [k, `${v}`] : [k, v];
+const flattenObject = ([k, v]) => ({ [k]: v });
+export const toSingleObject = (acc, curr) => ({ ...acc, ...curr });
 
-  return f;
+export const cleanData = data => {
+  return Object.entries(data)
+    .filter(notErrorOrUndefined)
+    .map(arrayToString)
+    .filter(notEmptyString)
+    .map(boolToString)
+    .map(flattenObject)
+    .reduce(toSingleObject)
 };
 
 export const getFingerprint = () =>
