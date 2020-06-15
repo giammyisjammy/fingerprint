@@ -1,56 +1,58 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto+Mono:400,700&display=swap');
 
 * {
-    font-family: 'Roboto Mono', monospace;
+	font-family: 'Roboto Mono', monospace;
 }
 
 html,
 body {
-    font-size: 16px;
-    height: 100%;
-    width: 100%;
-    line-height: 1.8em;
+	font-size: 16px;
+	height: 100%;
+	width: 100%;
+	line-height: 1.8em;
 }
 
 h1 {
-    line-height: 1.4em;
+	line-height: 1.4em;
 }
 
 tbody tr:nth-of-type(odd) {
-    background-color: #00000011;
+	background-color: #00000011;
 }
 
 section {
-    padding: 2em;
-    width: calc(100% - 4em);
-    border-bottom: 1px solid #00000011;
-    overflow-x: auto;
+	padding: 2em;
+	width: calc(100% - 4em);
+	border-bottom: 1px solid #00000011;
+	overflow-x: auto;
 }
 
 table {
-    width: 100%;
+	width: 100%;
+	max-width: 100%;
 }
 
 thead td {
-    margin: 0;
-    padding: 0;
-    padding-bottom: 1em;
-    font-weight: bold;
-    font-size: larger;
+	margin: 0;
+	padding: 0;
+	padding-bottom: 1em;
+	font-weight: bold;
+	font-size: larger;
 }
 
 td {
-    padding: .8em 24px;
-    font-size: small;
-    text-transform: capitalize;
+	padding: 0.8em 24px;
+	font-size: small;
+	text-transform: capitalize;
+	/* word-break: break-all; */
 }
 
 td:first-child {
-    width: 10em;
+	width: 10em;
 }
 
 footer {
-    text-align: center;
-    padding: 2em;
-    background-color: #FFF9C4;
+	text-align: center;
+	padding: 2em;
+	background-color: #fff9c4;
 }
