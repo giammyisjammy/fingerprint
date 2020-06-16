@@ -39,7 +39,7 @@ function App() {
 	return (
 		<div>
 			<Helmet>
-				<title>Seanky fingerprint and IP tracker</title>
+				<title>Sneaky fingerprint and IP tracker</title>
 				<meta
 					name="description"
 					content="Small React app to collect a device's fingerprint and IP address metadata"
